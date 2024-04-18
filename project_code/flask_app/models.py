@@ -14,6 +14,8 @@ class User(db.Document, UserMixin):
     email = db.StringField(unique=True, required=True)
     password = db.StringField(required=True)
     profile_pic = db.ImageField()
+    posted_images = db.ListField(db.ImageField())
+
 
     # Returns unique string identifying our object
     def get_id(self):

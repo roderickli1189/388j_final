@@ -15,12 +15,15 @@ from wtforms.validators import (
 from .models import User
 
 
-class SearchForm(FlaskForm):
-    search_query = StringField(
-        "Query", validators=[InputRequired(), Length(min=1, max=100)]
-    )
-    submit = SubmitField("Search")
+#class SearchForm(FlaskForm):
+#    search_query = StringField(
+#        "Query", validators=[InputRequired(), Length(min=1, max=100)]
+#    )
+#    submit = SubmitField("Search")
 
+class UploadSquirrelPic(FlaskForm):
+    picture = FileField('Squirrel Picture', validators=[FileRequired(), FileAllowed(['png', 'jpg'], 'Images only!')])
+    submit_picture = SubmitField('Upload')
 
 class MovieReviewForm(FlaskForm):
     text = TextAreaField(
