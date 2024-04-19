@@ -5,7 +5,7 @@ from io import BytesIO
 from .. import bcrypt
 from werkzeug.utils import secure_filename
 from ..forms import RegistrationForm, LoginForm, UpdateUsernameForm, UpdateProfilePicForm, UploadSquirrelPic
-from ..models import User
+from ..models import User, SquirrelPost
 
 users = Blueprint("users", __name__)
 
@@ -96,29 +96,18 @@ def squirrel_post():
     if request.method == "POST":
         if upload_squirrel_form.validate_on_submit():
             image = upload_squirrel_form.picture.data
+
             filename = secure_filename(image.filename)
             content_type = f'images/{filename[-3:]}'
 
-            # Save the image to the posted_images field of the current user
-            if current_user.posted_images is None:
-                current_user.posted_images = []
-
-            # not sure if this is going to work
-            current_user.posted_images.append({
-                'filename': filename,
-                'content_type': content_type,
-                'data': image.stream
-            })
-            current_user.save()
+            # Create a new SquirrelPost object and save it to db
+            squirrel_post = SquirrelPost()
+            squirrel_post.posted_images.put(image.stream, content_type=content_type)
+            squirrel_post.save()
 
             return redirect(url_for('users.squirrel_post'))
 
-    # Get all images posted by all users
-    all_images = []
-    users = User.objects()
-    for user in users:
-        if user.posted_images:
-            for posted_image in user.posted_images:
-                all_images.append(posted_image['data'])
+    # Get all squirrel posts
+    all_squirrel_posts = SquirrelPost.objects()
 
-    return render_template('squirrel_post.html', upload_squirrel_form=upload_squirrel_form, all_images=all_images)
+    return render_template('squirrel_post.html', upload_squirrel_form=upload_squirrel_form, all_squirrel_posts=all_squirrel_posts)

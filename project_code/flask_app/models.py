@@ -13,14 +13,14 @@ class User(db.Document, UserMixin):
     username = db.StringField(unique=True, required=True, min=1, max=40)
     email = db.StringField(unique=True, required=True)
     password = db.StringField(required=True)
-    profile_pic = db.ImageField()
-    posted_images = db.ListField(db.ImageField())
-
 
     # Returns unique string identifying our object
     def get_id(self):
         # TODO: implement
         return self.username
+
+class SquirrelPost(db.Document):
+    posted_images = db.ImageField()
 
 # TODO: implement fields
 class Review(db.Document):
