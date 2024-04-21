@@ -2,19 +2,24 @@
 <div class="main-container">
   <div class="decoration-main-container"><div class="decoration-main"></div></div>
   <h2 class="main-title"> Look at Squirrels </h2>
-  <form class="searchbar" action="/" method="POST">
-    {{ form.csrf_token }}
-    {{ form.search_query(class="form-control", placeholder="movie name") }}
-
-    {% if form.search_query.errors %}
-      <div class="error" role="alert">
-        {% for error in form.search_query.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-      </div>
-    {% endif %}
-    
-    {{ form.submit(class="form-button") }}
-  </form>
+  <!-- insert code to display posts from db here -->
+  <div class="reviews">
+    <h1 class="reviews-title"> Reviews
+      <!-- <small class="reviews-count"> {{ reviews | length }} reviews </small> -->
+    </h1>
+    <ul class="review-container">
+      {% for squirrel_post in squirrel_posts %}
+        <li class="review flex gap-2">
+          <div class="w-full">
+            <span class="review-date">{{ squirrel_post.date }}</span>
+            <a class="review-commenter">
+              @{{ squirrel_post.commenter.username }}
+            </a>
+            <p class="review-content">{{ squirrel_post.content }}</p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}

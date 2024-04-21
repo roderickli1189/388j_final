@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 
 from .. import movie_client
 from ..forms import MovieReviewForm, SearchForm
-from ..models import User, Review
+from ..models import User, Review, SquirrelPost
 from ..utils import current_time
 
 movies = Blueprint("movies", __name__)
@@ -22,11 +22,12 @@ def get_b64_img(username):
 @movies.route("/", methods=["GET", "POST"])
 def index():
     form = SearchForm()
+    squirrel_posts = SquirrelPost.objects()
 
     if form.validate_on_submit():
         return redirect(url_for("movies.query_results", query=form.search_query.data))
 
-    return render_template("index.html", form=form)
+    return render_template("index.html", form=form, squirrel_posts = squirrel_posts)
 
 
 @movies.route("/search-results/<query>", methods=["GET"])

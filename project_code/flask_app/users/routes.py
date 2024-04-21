@@ -4,8 +4,9 @@ import base64
 from io import BytesIO
 from .. import bcrypt
 from werkzeug.utils import secure_filename
-from ..forms import RegistrationForm, LoginForm, UpdateUsernameForm, UpdateProfilePicForm, UploadSquirrelPic
+from ..forms import RegistrationForm, LoginForm, UpdateUsernameForm, UpdateProfilePicForm, SquirrelReviewForm
 from ..models import User, SquirrelPost
+from ..utils import current_time
 
 users = Blueprint("users", __name__)
 
@@ -57,6 +58,18 @@ def logout():
 @users.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
+
+    squirrel_review_form = SquirrelReviewForm()
+    if squirrel_review_form.validate_on_submit():
+        squirrel_post = SquirrelPost(
+            commenter=current_user._get_current_object(),
+            content=squirrel_review_form.text.data,
+            date=current_time()
+        )
+
+        squirrel_post.save()
+        return redirect(url_for('movies.index'))
+
     update_username_form = UpdateUsernameForm()
     update_profile_pic_form = UpdateProfilePicForm()
     if request.method == "POST":
@@ -79,14 +92,15 @@ def account():
                 current_user.profile_pic.replace(image.stream, content_type=content_type)
             current_user.save()
             return redirect(url_for('users.account'))
-
+    
+    
     # TODO: handle get requests
     
     image = None
     if current_user.profile_pic.get() is not None:
         image_bytes = BytesIO(current_user.profile_pic.read())
         image = base64.b64encode(image_bytes.getvalue()).decode()
-    return render_template('account.html', update_username_form = update_username_form, update_profile_pic_form = update_profile_pic_form, image = image)
+    return render_template('account.html', squirrel_review_form = squirrel_review_form, update_username_form = update_username_form, update_profile_pic_form = update_profile_pic_form, image = image)
 
 
 @users.route("/squirrel-post", methods=["GET", "POST"])

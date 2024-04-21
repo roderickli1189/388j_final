@@ -22,5 +22,16 @@ class SquirrelPost(db.Document):
     commenter = db.ReferenceField(User, required=True)
     content = db.StringField(required=True, min=5, max=500)
     date = db.StringField(required=True)
-    location = db.StringField(required=True)
+    #location = db.StringField()
+    #image = db.StringField()
+
+
+# TODO: implement fields
+class Review(db.Document):
+    commenter = db.ReferenceField(User, required=True)
+    content = db.StringField(required=True, min=5, max=500)
+    date = db.StringField(required=True)
+    imdb_id = db.StringField(required=True, min=9, max=9)
+    movie_title = db.StringField(required=True, min=1, max=100)
     image = db.StringField()
+    #Uncomment when other fields are ready for review pictures
