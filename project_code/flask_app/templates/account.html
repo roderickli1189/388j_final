@@ -80,13 +80,24 @@
                     </div>
                 {% endif %}
             </div>
+            <div class="form-group review-input">
+                {{ squirrel_review_form.location.label }} {{ squirrel_review_form.location(class="form-content") }}
+                {% if squirrel_review_form.location.errors %}
+                    <div class="error" role="alert">
+                        {% for error in squirrel_review_form.location.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
             {{ squirrel_review_form.submit(class="review-button") }}
         </form>
     </div>
 </div>
 
-<div class="flex justify-center">
+<!--<div class="flex justify-center">
     {# TODO: Link to see all of the current user's reviews. #}
     <a href = "{{url_for('movies.user_detail', username=current_user.username)}}">User Reviews</a>
-</div>
+</div> -->
+
 {% endblock %}

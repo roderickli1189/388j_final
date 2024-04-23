@@ -17,14 +17,22 @@ class User(db.Document, UserMixin):
     def get_id(self):
         return self.username
 
+#model for a comment
+class Comment(db.Document):
+    commenter = db.ReferenceField(User, required=True)
+    commenter_profile_pic = db.StringField(required=True)
+    content = db.StringField(required=True, min_length=5, max_length=500)
+    date = db.StringField(required=True)
+
 # model for the post containing image of squirrel and comments
 class SquirrelPost(db.Document):
     commenter = db.ReferenceField(User, required=True)
     content = db.StringField(required=True, min=5, max=500)
     date = db.StringField(required=True)
-    image = db.StringField()
-    
-    #location = db.StringField()
+    image = db.StringField(required=True)
+    location = db.StringField(required=True)
+    comments = db.ListField(db.ReferenceField(Comment))
+
 
 
 # TODO: implement fields

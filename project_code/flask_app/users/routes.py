@@ -82,7 +82,8 @@ def account():
             commenter=current_user._get_current_object(),
             content=squirrel_review_form.text.data,
             date=current_time(),
-            image=image_base64
+            image=image_base64,
+            location=squirrel_review_form.location.data
         )
         squirrel_post.save()
 

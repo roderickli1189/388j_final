@@ -1,0 +1,59 @@
+{% extends "header.html" %} {% block content %}
+<div class="main-container">
+  <div class="decoration-main-container"><div class="decoration-main"></div></div>
+  <h2 class="main-title"> Post View Page </h2>
+  <!-- insert code to display posts from db here -->
+  <div class="reviews">
+    <h1 class="reviews-title"> Looking at {{ squirrel_post.commenter.username }}'s post
+      <!-- <small class="reviews-count"> {{ reviews | length }} reviews </small> -->
+      <ul class="review-container">
+        <li class="review flex gap-2">
+            <img class="h-20 w-20 rounded-lg" src="data:image/png;base64,{{squirrel_post.image}}" alt="" />
+            <div class="w-full">
+                <span class="review-date">{{ squirrel_post.date }}</span>
+                <a class="review-commenter">
+                    @{{ squirrel_post.commenter.username }}
+                </a>
+                <p>Location: {{ squirrel_post.location }}</p>
+                <p class="review-content">{{ squirrel_post.content }}</p>
+            </div>
+        </li>
+      </ul>
+    </h1>
+
+    {% if current_user.is_authenticated %}
+      {# Movie review submission form #}
+      <div class="container mx-auto">
+        <form method="POST" action="" class="review-form">
+          {{ form.csrf_token }}
+          <div class="form-group review-input">
+            {{ form.text.label }} {{ form.text(class="form-content") }}
+            {% if form.text.errors %}
+              <div class="error" role="alert">
+                {% for error in form.text.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          {{ form.submit(class="review-button") }}
+        </form>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if squirrel_post.comments %}
+    {% for comment in squirrel_post.comments %}
+          <li class="review flex gap-2">
+            <img class="h-20 w-20 rounded-lg" src="data:image/png;base64,{{comment.commenter_profile_pic}}" alt="" />
+            <div class="w-full">
+                <p class="commenter">user: {{ comment.commenter.username }}</p>
+                <p class="comment-date">date: {{ comment.date }}</p>
+                <p class="comment-content">{{ comment.content }}</p>
+            </div>
+          </li>
+      {% endfor %}
+  {% endif %}
+
+</div>
+{% endblock %}

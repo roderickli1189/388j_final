@@ -3,7 +3,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
-from wtforms import StringField, SubmitField, TextAreaField, PasswordField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField, SelectField
 from wtforms.validators import (
     InputRequired,
     Length,
@@ -20,12 +20,21 @@ class SearchForm(FlaskForm):
     )
     submit = SubmitField("Search")
 
+class CommentForm(FlaskForm):
+    text = TextAreaField(
+        "Comment", validators=[InputRequired(), Length(min=5, max=500)]
+    )
+    submit = SubmitField("Enter Comment")
+
 class SquirrelReviewForm(FlaskForm):
     text = TextAreaField(
         "Comment", validators=[InputRequired(), Length(min=5, max=500)]
     )
 
     picture = FileField('Squirrel Picture', validators=[FileRequired(), FileAllowed(['png', 'jpg'], 'Images only!')])
+
+    location_choices = [('', 'Select Location'), ('McKeldin Mall', 'McKeldin Mall'), ('Iribe', 'Iribe'), ('Morrill Quad', 'Morrill Quad'), ('South Campus', 'South Campus'), ('North Campus', 'North Campus'), ('Chapel Lawn', 'Chapel Lawn')]
+    location = SelectField('Location', choices= location_choices, validators=[InputRequired()])
 
     submit = SubmitField("Submit Post")
     
