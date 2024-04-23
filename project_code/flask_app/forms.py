@@ -25,7 +25,9 @@ class SquirrelReviewForm(FlaskForm):
         "Comment", validators=[InputRequired(), Length(min=5, max=500)]
     )
 
-    submit = SubmitField("Enter Comment")
+    picture = FileField('Squirrel Picture', validators=[FileRequired(), FileAllowed(['png', 'jpg'], 'Images only!')])
+
+    submit = SubmitField("Submit Post")
     
 class MovieReviewForm(FlaskForm):
     text = TextAreaField(

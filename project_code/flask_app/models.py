@@ -22,8 +22,9 @@ class SquirrelPost(db.Document):
     commenter = db.ReferenceField(User, required=True)
     content = db.StringField(required=True, min=5, max=500)
     date = db.StringField(required=True)
+    image = db.StringField()
+    
     #location = db.StringField()
-    #image = db.StringField()
 
 
 # TODO: implement fields

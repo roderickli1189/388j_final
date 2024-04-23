@@ -12,7 +12,14 @@ users = Blueprint("users", __name__)
 
 """ ************ User Management views ************ """
 
+""" ************ Helper for pictures ************ """
+def get_b64_img(username):
+    user = User.objects(username=username).first()
+    bytes_im = io.BytesIO(user.profile_pic.read())
+    image = base64.b64encode(bytes_im.getvalue()).decode()
+    return image
 
+    
 # TODO: implement
 @users.route("/register", methods=["GET", "POST"])
 def register():
@@ -60,14 +67,25 @@ def logout():
 def account():
 
     squirrel_review_form = SquirrelReviewForm()
+    
     if squirrel_review_form.validate_on_submit():
+        
+        image = squirrel_review_form.picture.data
+
+        # Read the content of the file
+        image_bytes = image.read()
+
+        # Encode the bytes using base64
+        image_base64 = base64.b64encode(image_bytes).decode()
+        
         squirrel_post = SquirrelPost(
             commenter=current_user._get_current_object(),
             content=squirrel_review_form.text.data,
-            date=current_time()
+            date=current_time(),
+            image=image_base64
         )
-
         squirrel_post.save()
+
         return redirect(url_for('movies.index'))
 
     update_username_form = UpdateUsernameForm()

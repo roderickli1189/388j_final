@@ -10,6 +10,7 @@
     <ul class="review-container">
       {% for squirrel_post in squirrel_posts %}
         <li class="review flex gap-2">
+          <img class="h-20 w-20 rounded-lg" src="data:image/png;base64,{{squirrel_post.image}}" alt="" />
           <div class="w-full">
             <span class="review-date">{{ squirrel_post.date }}</span>
             <a class="review-commenter">
