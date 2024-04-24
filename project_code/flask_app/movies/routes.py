@@ -8,6 +8,7 @@ from ..forms import MovieReviewForm, SearchForm, CommentForm
 from ..models import User, Review, SquirrelPost, Comment
 from ..utils import current_time
 
+
 movies = Blueprint("movies", __name__)
 """ ************ Helper for pictures uses username to get their profile picture************ """
 def get_b64_img(username):
@@ -29,7 +30,7 @@ def index():
 
     return render_template("index.html", form=form, squirrel_posts = squirrel_posts)
 
-@movies.route("/post/<post_id>", methods=["GET", "POST"])
+'''@movies.route("/post/<post_id>", methods=["GET", "POST"])
 def comment_page(post_id):
     # Convert the string representation of ObjectId to ObjectId
     post_id_obj = ObjectId(post_id)
@@ -59,7 +60,7 @@ def comment_page(post_id):
         squirrel_post.comments.append(comment)
         squirrel_post.save()
         
-    return render_template("comment.html", squirrel_post=squirrel_post, form = form)
+    return render_template("comment.html", squirrel_post=squirrel_post, form = form)'''
 
 @movies.route("/search-results/<query>", methods=["GET"])
 def query_results(query):

@@ -20,7 +20,7 @@ class User(db.Document, UserMixin):
 #model for a comment
 class Comment(db.Document):
     commenter = db.ReferenceField(User, required=True)
-    commenter_profile_pic = db.StringField(required=True)
+    commenter_profile_pic = db.StringField()
     content = db.StringField(required=True, min_length=5, max_length=500)
     date = db.StringField(required=True)
 

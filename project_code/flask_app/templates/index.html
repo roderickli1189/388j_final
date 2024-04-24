@@ -9,7 +9,7 @@
     </h1>
     <ul class="review-container">
       {% for squirrel_post in squirrel_posts %}
-        <a href="{{ url_for('movies.comment_page', post_id=squirrel_post.id) }}">
+        <a href="{{ url_for('comment.comment_page', post_id=squirrel_post.id) }}">
           <li class="review flex gap-2">
             <img class="h-20 w-20 rounded-lg" src="data:image/png;base64,{{squirrel_post.image}}" alt="" />
             <div class="w-full">
