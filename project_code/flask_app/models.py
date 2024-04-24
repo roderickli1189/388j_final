@@ -9,8 +9,9 @@ def load_user(user_id):
 # model for User profile
 class User(db.Document, UserMixin):
     username = db.StringField(unique=True, required=True, min=1, max=40)
-    email = db.StringField(unique=True, required=True)
-    password = db.StringField(required=True)
+    discord_id = db.StringField(unique=True)
+    email = db.StringField(unique=True)
+    password = db.StringField()
     profile_pic = db.ImageField()
 
     # Returns unique string identifying our object
