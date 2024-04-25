@@ -24,6 +24,8 @@ def call_back():
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': 'https://388j-final.vercel.app/callback'
+        #'http://127.0.0.1:8000/callback'
+        #'https://388j-final.vercel.app/callback'
     }
     
     #now sending that data back to discord to get access token
