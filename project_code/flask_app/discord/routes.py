@@ -23,7 +23,7 @@ def call_back():
         'client_secret': "shee3vVoWnrFsKuhgpJufmM11sTYKGxG",
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': 'https://388j-final.vercel.app/callback'
+        'redirect_uri': 'http://127.0.0.1:8000/callback'
         #'http://127.0.0.1:8000/callback'
         #'https://388j-final.vercel.app/callback'
     }

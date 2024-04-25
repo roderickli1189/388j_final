@@ -10,7 +10,7 @@ def load_user(user_id):
 class User(db.Document, UserMixin):
     username = db.StringField(unique=True, required=True, min=1, max=40)
     discord_id = db.StringField()
-    email = db.StringField(unique=True)
+    email = db.StringField()
     password = db.StringField()
     profile_pic = db.ImageField()
 
