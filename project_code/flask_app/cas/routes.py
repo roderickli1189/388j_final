@@ -24,17 +24,17 @@ def cascallback():
     if 'cas:authenticationSuccess' in r['cas:serviceResponse']:
         username = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
         extern_user_id = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
-        return "success"
         
-        '''user = User.objects(extern_id=extern_user_id).first()
+        user = User.objects(extern_id=extern_user_id).first()
         if not user:
             user = User(username=username, extern_id=extern_user_id)
             user.save()
         
         login_user(user)
-        return redirect(url_for("users.account"))'''
+        return redirect(url_for("users.account"))
+
     else:
-        return "faliure"
+        return render_template("404.html")
 
 '''@cas.route("/caslogout")
 @login_required
