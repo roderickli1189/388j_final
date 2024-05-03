@@ -43,11 +43,11 @@ def call_back():
     if resp2.status_code == 200:
         user_info = resp2.json()
         username = user_info['user']['username']
-        discord_user_id = user_info['user']['id']
+        extern_user_id = user_info['user']['id']
 
-        user = User.objects(discord_id=discord_user_id).first()
+        user = User.objects(extern_id_id=extern_user_id).first()
         if not user:
-            user = User(username=username, discord_id=discord_user_id)
+            user = User(username=username, extern_id=extern_user_id)
             user.save()
         
         login_user(user)
