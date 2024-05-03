@@ -57,9 +57,10 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Sign Up")
 
     def validate_username(self, username):
-        user = User.objects(username=username.data).first()
-        if user is not None:
-            raise ValidationError("Username is taken")
+        user1 = User.objects(extern_id=username.data).first()
+        user2 = User.objects(username=username.data).first()
+        if user1 or user2 is not None:
+            raise ValidationError("Username is taken or someone else has that id")
 
     def validate_email(self, email):
         user = User.objects(email=email.data).first()
