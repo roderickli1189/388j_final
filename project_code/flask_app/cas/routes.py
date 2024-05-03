@@ -9,6 +9,7 @@ from ..models import User, Review, SquirrelPost, Comment
 from ..utils import current_time
 from flask_login import current_user, login_required, login_user, logout_user
 import os, requests
+import xmltodict
 
 cas = Blueprint("cas", __name__)
 
