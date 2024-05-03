@@ -30,4 +30,4 @@ Post information including post title, image, date, location, and comments.
 ## Q6 Describe what Python package or API you will use and how it will affect the user experience:
 
 Grading comment:
-We can implement a log in with discord authentication api. Additionally we are using the mongo db api for posts and account information.
+We can implement a log in with discord authentication api. Additionally we are using the mongo db api for posts and account information. Also used CAS to implement CAS login.
