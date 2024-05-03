@@ -15,7 +15,7 @@ cas = Blueprint("cas", __name__)
 @cas.route("/cascallback")
 def cascallback():
     ticket = request.args['ticket']
-    resp = requests.get("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/serviceValidate", params={"service":"https://388j-final.vercel.app//cascallback","ticket":ticket})
+    resp = requests.get("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/serviceValidate", params={"service":"https://388j-final.vercel.app/cascallback","ticket":ticket})
     r = xmltodict.parse(resp.content)
     
     if 'cas:authenticationSuccess' in r['cas:serviceResponse']:
