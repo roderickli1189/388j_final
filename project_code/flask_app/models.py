@@ -4,12 +4,12 @@ from . import db, login_manager
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.objects(username = user_id).first()
+    return User.objects(extern_id = user_id).first()
 
 # model for User profile
 class User(db.Document, UserMixin):
     username = db.StringField(unique=True, required=True, min=1, max=40)
-    extern_id = db.StringField()
+    extern_id = db.StringField(unique=True, required=True, min=1, max=100)
     email = db.StringField()
     password = db.StringField()
     profile_pic = db.ImageField()
