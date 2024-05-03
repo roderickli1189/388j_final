@@ -23,7 +23,7 @@ def cascallback():
         discord_user_id = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
 
         
-        user = User.objects(extern_id_id=extern_user_id).first()
+        user = User.objects(extern_id=extern_user_id).first()
         if not user:
             user = User(username=username, extern_id=extern_user_id)
             user.save()

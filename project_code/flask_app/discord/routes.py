@@ -45,7 +45,7 @@ def call_back():
         username = user_info['user']['username']
         extern_user_id = user_info['user']['id']
 
-        user = User.objects(extern_id_id=extern_user_id).first()
+        user = User.objects(extern_id=extern_user_id).first()
         if not user:
             user = User(username=username, extern_id=extern_user_id)
             user.save()
