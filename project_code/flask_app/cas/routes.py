@@ -21,7 +21,7 @@ def cascallback():
     
     if 'cas:authenticationSuccess' in r['cas:serviceResponse']:
         username = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
-        discord_user_id = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
+        extern_user_id = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
 
         
         user = User.objects(extern_id=extern_user_id).first()
