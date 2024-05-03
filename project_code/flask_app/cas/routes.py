@@ -18,21 +18,22 @@ def cascallback():
     ticket = request.args['ticket']
     resp = requests.get("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/serviceValidate", params={"service":"https://388j-final.vercel.app/cascallback","ticket":ticket})
     r = xmltodict.parse(resp.content)
+
     
     if 'cas:authenticationSuccess' in r['cas:serviceResponse']:
         username = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
         extern_user_id = r['cas:serviceResponse']['cas:authenticationSuccess']['cas:user']
-
+        return "success"
         
-        user = User.objects(extern_id=extern_user_id).first()
+        '''user = User.objects(extern_id=extern_user_id).first()
         if not user:
             user = User(username=username, extern_id=extern_user_id)
             user.save()
         
         login_user(user)
-        return redirect(url_for("users.account"))
+        return redirect(url_for("users.account"))'''
     else:
-        return render_template("404.html")
+        return "faliure"
 
 '''@cas.route("/caslogout")
 @login_required
