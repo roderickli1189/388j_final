@@ -36,8 +36,8 @@ def cascallback():
     else:
         return render_template("404.html")
 
-'''@cas.route("/caslogout")
+@cas.route("/caslogout")
 @login_required
 def caslogout():
     logout_user()
-    return redirect("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/logout?service=https%3A%2F%2Fhttps://388j-final.vercel.app/%2F")'''
+    return redirect("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/logout?service=https%3A%2F%2F388j-final.vercel.app/%2F")
