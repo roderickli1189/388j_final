@@ -14,8 +14,8 @@ cas = Blueprint("cas", __name__)
 
 @cas.route("/cascallback")
 def cascallback():
-    return "success"
-'''    ticket = request.args['ticket']
+    
+    ticket = request.args['ticket']
     resp = requests.get("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/serviceValidate", params={"service":"https://388j-final.vercel.app/cascallback","ticket":ticket})
     r = xmltodict.parse(resp.content)
     
@@ -32,10 +32,10 @@ def cascallback():
         login_user(user)
         return redirect(url_for("users.account"))
     else:
-        return render_template("404.html")'''
+        return render_template("404.html")
 
-@cas.route("/caslogout")
+'''@cas.route("/caslogout")
 @login_required
 def caslogout():
     logout_user()
-    return redirect("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/logout?service=https%3A%2F%2Fhttps://388j-final.vercel.app/%2F")
+    return redirect("https://shib.idm.umd.edu/shibboleth-idp/profile/cas/logout?service=https%3A%2F%2Fhttps://388j-final.vercel.app/%2F")'''
