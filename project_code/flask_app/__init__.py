@@ -35,7 +35,7 @@ from .users.routes import users
 from .movies.routes import movies
 from .comment.routes import comment
 from .discord.routes import discord
-from .cas.routes import cas
+#from .cas.routes import cas
 
 def custom_404(e):
     return render_template("404.html"), 404
@@ -56,7 +56,7 @@ def create_app(test_config=None):
     app.register_blueprint(movies)
     app.register_blueprint(comment)
     app.register_blueprint(discord)
-    app.register_blueprint(cas)
+    #app.register_blueprint(cas)
     app.register_error_handler(404, custom_404)
 
     login_manager.login_view = "users.login"
