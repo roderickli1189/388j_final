@@ -16,7 +16,7 @@ class User(db.Document, UserMixin):
 
     # Returns unique string identifying our object
     def get_id(self):
-        return self.username
+        return self.extern_id
 
 #model for a comment
 class Comment(db.Document):

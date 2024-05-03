@@ -49,7 +49,7 @@ def call_back():
         if not user:
             user = User(username=username, extern_id=extern_user_id)
             user.save()
-        
+
         login_user(user)
         return redirect(url_for("users.account"))
     else:
