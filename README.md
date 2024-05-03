@@ -15,7 +15,7 @@ You can make a post and comment on a post.
 ## Q3 List and describe at least 4 forms:
 
 Grading comment:
-Registration (create an account with user/pass), login (UMD CAS, discord, user/pass), post submission (logged-in users can post a squirrel and select where it was seen), update user profile (logged in users can update pfp and username), comment form (allows logged in users to comment on a squirrel post).
+Registration (create an account with user/pass), login (user/pass), post submission (logged-in users can post a squirrel and select where it was seen), update user profile (logged in users can update pfp and username), comment form (allows logged in users to comment on a squirrel post).
 ## Q4 List and describe your routes/blueprints (don’t need to list all routes/blueprints you may have–just enough for the requirement):
 
 Grading comment:
