@@ -15,7 +15,7 @@ You can make a post and comment on a post.
 ## Q3 List and describe at least 4 forms:
 
 Grading comment:
-Registration, login, post submission, update user profile.
+Registration, login, post submission, update user profile, comment form.
 ## Q4 List and describe your routes/blueprints (don’t need to list all routes/blueprints you may have–just enough for the requirement):
 
 Grading comment:
